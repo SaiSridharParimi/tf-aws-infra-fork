@@ -27,3 +27,8 @@ variable "availability_zones" {
   type        = list(string)
   description = "Availability Zones for subnets"
 }
+
+variable "igw_tag" {
+  type        = string
+  description = "Name of Internet Gateway"
+}
