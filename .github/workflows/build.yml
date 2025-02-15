@@ -18,9 +18,3 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.10.5
-
-      # - name: Format Terraform
-      #   run: terraform fmt
-
-      # - name: Validate Terraform
-      #   run: terraform validate
