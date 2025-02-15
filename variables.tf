@@ -27,18 +27,3 @@ variable "availability_zones" {
   type        = list(string)
   description = "Availability Zones for subnets"
 }
-
-variable "igw_name" {
-  type        = string
-  description = "Name of Internet Gateway"
-}
-
-variable "public_rt_name" {
-  type        = string
-  description = "Name of Public Route Table"
-}
-
-variable "private_rt_name" {
-  type        = string
-  description = "Name of Private Route Table"
-}
