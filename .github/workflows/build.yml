@@ -20,7 +20,7 @@ jobs:
           terraform_version: latest
       
       - name: Terraform Initialization
-        run: terraform init
+        run: terraform fmt --recursive
 
       - name: Terraform Validation
         run: terraform validate
