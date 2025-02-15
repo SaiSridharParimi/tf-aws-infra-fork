@@ -6,7 +6,7 @@ resource "aws_subnet" "main_public_subnet" {
   availability_zone = var.availability_zones[count.index]
 
   tags = {
-    Name = "${var.vpc_tag}-public-subnet-${count.index}"
+    Name = "${var.vpc_tag}-main-public-subnet-${count.index}"
   }
 }
 
@@ -18,6 +18,6 @@ resource "aws_subnet" "main_private_subnet" {
   availability_zone = var.availability_zones[count.index]
 
   tags = {
-    Name = "${var.vpc_tag}-private-subnet-${count.index}"
+    Name = "${var.vpc_tag}-main-private-subnet-${count.index}"
   }
 }
