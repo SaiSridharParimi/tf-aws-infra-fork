@@ -20,7 +20,7 @@ jobs:
           terraform_version: latest
       
       - name: Terraform Initialization
-        uses: terraform init
+        run: terraform init
 
       - name: Terraform Validation
-        uses: terraform validate
+        run: terraform validate
