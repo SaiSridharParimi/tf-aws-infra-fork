@@ -5,7 +5,7 @@ resource "aws_route_table" "main_public_rt" {
     gateway_id = aws_internet_gateway.main_igw.id
   }
   tags = {
-    Name = var.public_rt_name
+    Name = "rt-public-${var.vpc_tag}-${var.region}"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_route_table_association" "main_public_rt_assoc" {
 resource "aws_route_table" "main_private_rt" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = var.private_rt_name
+    Name = "rt-private-${var.vpc_tag}-${var.region}"
   }
 
 }
