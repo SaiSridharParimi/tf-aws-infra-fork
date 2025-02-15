@@ -7,14 +7,20 @@ on:
 
 jobs:
   build:
-    name: Infra Setup
+    name: Infra Setup 
     runs-on : ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3  
 
-      - name: installing terraform
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.10.5
+          terraform_version: latest
+      
+      - name: Terraform Initialization
+        run: terraform init
+
+      - name: Terraform Validation
+        run: terraform validate
