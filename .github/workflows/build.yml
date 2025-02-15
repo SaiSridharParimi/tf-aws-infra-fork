@@ -1,13 +1,13 @@
 name : Terraform-Workflow
 
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - main
 
 jobs:
   build:
-    name: Infra Setup
+    name: Infra Setup 
     runs-on : ubuntu-latest
 
     steps:
