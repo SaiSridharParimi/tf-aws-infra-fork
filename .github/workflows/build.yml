@@ -23,9 +23,9 @@ jobs:
         working-directory: tf-infra
         run: terraform init
       
-      # - name: Terraform Format
-      #   working-directory: tf-infra
-      #   run: terraform fmt -check -recursive
+      - name: Terraform Format
+        working-directory: tf-infra
+        run: terraform fmt -check -recursive
 
       - name: Terraform Validation
         working-directory: tf-infra
