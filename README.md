@@ -11,6 +11,11 @@
 `AWS_PROFILE=dev/demo terraform plan`
 `AWS_PROFILE=dev/demo terraform apply`
 
+### AWS Networking
+- Create VPC 
+- Create public and private subnets for VPC
+- Create route tables and associate with public and private subnets
+- Create an internet gateway
 
 ### Running Terraform Script
 - `cd tf-infra`
