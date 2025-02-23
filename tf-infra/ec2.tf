@@ -5,7 +5,7 @@ resource "aws_instance" "application_instance" {
   associate_public_ip_address = true
   security_groups             = [aws_security_group.application_sg.id]
   key_name                    = var.key_name
-  depends_on = [aws_security_group.application_sg]
+  depends_on                  = [aws_security_group.application_sg]
 
   root_block_device {
     volume_size           = 25
@@ -13,6 +13,6 @@ resource "aws_instance" "application_instance" {
     delete_on_termination = true
   }
   tags = {
-      Name = "application-instance-${var.vpc_tag}"
-}
+    Name = "application-instance-${var.vpc_tag}"
+  }
 }
