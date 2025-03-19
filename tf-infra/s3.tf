@@ -1,7 +1,7 @@
 resource "random_uuid" "bucket_uuid" {}
 
 resource "aws_s3_bucket" "s3_storage" {
-  bucket = random_uuid.bucket_uuid.result
+  bucket        = random_uuid.bucket_uuid.result
   force_destroy = true
 }
 
