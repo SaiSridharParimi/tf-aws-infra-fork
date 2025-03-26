@@ -43,13 +43,18 @@ resource "aws_iam_role" "s3_access_role" {
     Statement = [
       {
         Action = "sts:AssumeRole"
-        Effect = "Allow "
+        Effect = "Allow"
         Principal = {
           Service = "ec2.amazonaws.com"
         }
       },
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "cloudwatch_agent" {
+  role       = aws_iam_role.s3_access_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "ec2_s3_attachment" {

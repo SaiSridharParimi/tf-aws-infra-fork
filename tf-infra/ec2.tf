@@ -28,6 +28,7 @@ resource "aws_instance" "application_instance" {
       echo "DIALECT=${var.database_engine}" | sudo tee -a /opt/csye6225/src/.env 
       echo "PORT=8080" | sudo tee -a /opt/csye6225/src/.env 
       echo "BUCKET_NAME=${aws_s3_bucket.s3_storage.bucket}" | sudo tee -a /opt/csye6225/src/.env 
+      sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/cw-config.json -s
     EOT
 
   tags = {
