@@ -88,3 +88,8 @@ variable "db_engine_version" {
   description = "Database Engine Version"
   type        = string
 }
+
+variable "domain" {
+  description = "Domain"
+  type        = string
+}
