@@ -1,7 +1,7 @@
 resource "aws_launch_template" "application_launch_template" {
   name_prefix   = "csye6225-asg-"
   image_id      = var.custom_ami_id
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   key_name      = var.key_name
   iam_instance_profile {
     name = aws_iam_instance_profile.application_instance_profile.name

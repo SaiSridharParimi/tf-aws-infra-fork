@@ -93,3 +93,13 @@ variable "domain" {
   description = "Domain"
   type        = string
 }
+
+variable "high_cpu_threshold" {
+  description = "High CPU Threshold"
+  type        = string
+}
+
+variable "low_cpu_threshold" {
+  description = "Low CPU Threshold"
+  type        = string
+}
