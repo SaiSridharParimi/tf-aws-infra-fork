@@ -103,3 +103,13 @@ variable "low_cpu_threshold" {
   description = "Low CPU Threshold"
   type        = string
 }
+
+variable "account_id" {
+  description = "Account ID"
+  type        = string
+}
+
+variable "cli_user" {
+  description = "CLI User"
+  type        = string
+}

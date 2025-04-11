@@ -31,11 +31,13 @@ resource "aws_db_instance" "default" {
   engine_version         = var.db_engine_version
   instance_class         = var.instance_class
   username               = var.db_username
-  password               = var.db_password
+  password               = jsondecode(aws_secretsmanager_secret_version.db_password.secret_string)["password"]
   parameter_group_name   = aws_db_parameter_group.db_pg.name
   db_subnet_group_name   = aws_db_subnet_group.default.name
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.database_security_group.id]
   publicly_accessible    = false
   multi_az               = false
+  kms_key_id             = aws_kms_key.rds_key.arn
+  storage_encrypted      = true
 }
