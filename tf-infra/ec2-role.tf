@@ -31,6 +31,17 @@ resource "aws_iam_policy" "s3_policy" {
           "s3:PutLifecycleConfiguration"
         ]
         Resource = "*"
+        }, {
+        Effect = "Allow"
+        Action = [
+          "kms:Decrypt",
+          "kms:Encrypt",
+          "kms:ReEncrypt*",
+          "kms:GenerateDataKey*",
+          "kms:DescribeKey",
+          "kms:CreateGrant"
+        ]
+        Resource = "*"
       }
     ]
   })

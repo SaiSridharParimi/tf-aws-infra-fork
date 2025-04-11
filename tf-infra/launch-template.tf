@@ -3,6 +3,7 @@ resource "aws_launch_template" "application_launch_template" {
   image_id      = var.custom_ami_id
   instance_type = "t3.micro"
   key_name      = var.key_name
+
   iam_instance_profile {
     name = aws_iam_instance_profile.application_instance_profile.name
   }
@@ -12,20 +13,28 @@ resource "aws_launch_template" "application_launch_template" {
     security_groups             = [aws_security_group.application_sg.id]
   }
 
-  user_data = base64encode(<<-EOT
-    #!/bin/bash
-      echo "HOST=${aws_db_instance.default.address}" | sudo tee /opt/csye6225/src/.env 
-      echo "DATABASE_PORT=3306" | sudo tee -a /opt/csye6225/src/.env 
-      echo "DATABASE_USERNAME=${var.db_username}" | sudo tee -a /opt/csye6225/src/.env 
-      echo "DATABASE_PASSWORD=${var.db_password}" | sudo tee -a /opt/csye6225/src/.env
-      echo "DATABASE_NAME=${var.db_name}" | sudo tee -a /opt/csye6225/src/.env 
-      echo "DIALECT=${var.database_engine}" | sudo tee -a /opt/csye6225/src/.env 
-      echo "PORT=8080" | sudo tee -a /opt/csye6225/src/.env 
-      echo "BUCKET_NAME=${aws_s3_bucket.s3_storage.bucket}" | sudo tee -a /opt/csye6225/src/.env 
-      sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/cw-config.json -s
-      sudo systemctl restart webapp.service
-    EOT
-  )
+  block_device_mappings {
+    device_name = "/dev/xvda"
+    ebs {
+      delete_on_termination = true
+      volume_type           = "gp2"
+      encrypted             = true
+      kms_key_id            = aws_kms_key.ec2_key.arn
+      volume_size           = 25
+    }
+  }
+
+  user_data = base64encode(templatefile("${path.module}/userdata.sh", {
+    HOST           = "${aws_db_instance.default.address}"
+    DATABASE_NAME  = var.db_name
+    DB_PASSWORD    = jsondecode(aws_secretsmanager_secret_version.db_password.secret_string)["password"]
+    DB_PORT        = 3306
+    S3_BUCKET_NAME = "${aws_s3_bucket.s3_storage.bucket}"
+    DB_DIALECT     = var.database_engine
+    SERVER_PORT    = 8080
+    DB_USER        = var.db_username
+    AWS_REGION     = var.region
+  }))
 
   tags = {
     Name = "application-instance-${var.vpc_tag}"

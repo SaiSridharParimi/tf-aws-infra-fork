@@ -6,13 +6,10 @@ resource "aws_autoscaling_group" "application_asg" {
     version = "$Latest"
   }
 
-  min_size                  = 3
-  max_size                  = 5
-  desired_capacity          = 3
-  health_check_type         = "ELB"
-  health_check_grace_period = 300
-  default_cooldown          = 60
-
+  min_size          = 3
+  max_size          = 5
+  desired_capacity  = 3
+  health_check_type = "ELB"
   target_group_arns = [aws_lb_target_group.application_tg.arn]
 
   tag {
