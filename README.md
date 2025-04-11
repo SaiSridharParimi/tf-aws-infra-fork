@@ -23,3 +23,10 @@
 - `terraform fmt`
 - `AWS_PROFILE=dev/demo terraform plan`
 - `AWS_PROFILE=dev/demo terraform apply`
+
+### Certificate
+AWS_PROFILE=demo aws acm import-certificate \
+  --certificate fileb://demo_sridharp_me.crt \
+  --private-key fileb://private.key \
+  --certificate-chain fileb://demo_sridharp_me.ca-bundle \
+  --region us-west-2
