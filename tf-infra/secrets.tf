@@ -1,11 +1,11 @@
 resource "random_password" "db_password" {
   length           = 16
   special          = true
-  override_special = "_%"
+  override_special = "_"
 }
 
 resource "aws_secretsmanager_secret" "db_password_secret" {
-  name        = "db-password-a8-v1"
+  name        = "db-password-a8-v4" #change
   description = "RDS instance DB password stored by Terraform"
   kms_key_id  = aws_kms_key.secrets_manager_key.arn
 }

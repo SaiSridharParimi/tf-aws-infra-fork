@@ -73,7 +73,7 @@ resource "aws_lb" "application_alb" {
 }
 
 data "aws_acm_certificate" "ssl_cert" {
-  domain      = "dev.sridharp.me"
+  domain      = "demo.sridharp.me" #dev.sridhar.me
   statuses    = ["ISSUED"]
   most_recent = true
 }
